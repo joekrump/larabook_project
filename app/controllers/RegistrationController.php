@@ -1,8 +1,13 @@
 <?php
 
+use Larabook\Forms\RegistrationForm;
+
 class RegistrationController extends \BaseController {
 
-	
+	function __construct(RegistrationForm $registrationForm)
+	{
+		$this->registrationForm = $registrationForm;
+	}
 	/**
 	 * Show the form to register a new user
 	 *
@@ -16,6 +21,8 @@ class RegistrationController extends \BaseController {
 
 	public function store()
 	{
+		$this->registrationForm->validate(Input::all());
+		
 		// create a new user.
 		// 
 		$user = User::create(
@@ -23,7 +30,7 @@ class RegistrationController extends \BaseController {
 		);
 
 		Auth::login($user);
-		
+
 		return Redirect::home();
 	}
 }
