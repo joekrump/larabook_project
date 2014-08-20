@@ -1,4 +1,7 @@
 <?php 
+
+// Run by running 'vendor/bin/codecept run functional' in the command-line
+// 
 $I = new FunctionalTester($scenario);
 $I->am('a guest');
 $I->wantTo('sign up for a Larabook account');
@@ -18,3 +21,4 @@ $I->seeRecord('users', [
 	'email'	   => 'john@example.com'
 ]);
 
+$I->assertTrue(Auth::check());
