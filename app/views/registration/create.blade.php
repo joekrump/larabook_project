@@ -1,40 +1,34 @@
 @extends('layouts.default')
 
 @section('content')
-	<div>
-		<h1>Register</h1>
+	<section class="row">
+		<div class="col-md-6">
+			<h1>Register</h1>
 
-		@if($errors->any())
-			<div class="alert alert-danger">
-				<h3>Uh Oh, Errors!</h3>
-				<ul>
-					@foreach($errors->all() as $error)
-						<li>{{ $error }}
-					@endforeach
-				</ul>
-			</div>
-		@endif
-		{{ Form::open(['route'=>'register_path']) }}
-			<div class="form-group">
-				{{ Form::label('username', 'Username:') }}
-				{{ Form::text('username', null, ['class'=>'form-control'])}}
-			</div>
-			<div class="form-group">
-				{{ Form::label('email', 'Email:') }}
-				{{ Form::text('email', null, ['class'=>'form-control'])}}
-			</div>
-			<div class="form-group">
-				{{ Form::label('password', 'Password:') }}
-				{{ Form::password('password', ['class'=>'form-control'])}}
-			</div>
-			<div class="form-group">
-				{{ Form::label('password_confirmation', 'Password Confirmation:') }}
-				{{ Form::password('password_confirmation', ['class'=>'form-control'])}}
-			</div>
-			<div class="form-group">
-				{{ Form::submit('Sign Up', ['class'=>'btn btn-primary']) }}
-			</div>
+			@include('layouts.partials.errors')
+			
+			{{ Form::open(['route'=>'register_path']) }}
+				<div class="form-group">
+					{{ Form::label('username', 'Username:') }}
+					{{ Form::text('username', null, ['class'=>'form-control'])}}
+				</div>
+				<div class="form-group">
+					{{ Form::label('email', 'Email:') }}
+					{{ Form::text('email', null, ['class'=>'form-control'])}}
+				</div>
+				<div class="form-group">
+					{{ Form::label('password', 'Password:') }}
+					{{ Form::password('password', ['class'=>'form-control'])}}
+				</div>
+				<div class="form-group">
+					{{ Form::label('password_confirmation', 'Password Confirmation:') }}
+					{{ Form::password('password_confirmation', ['class'=>'form-control'])}}
+				</div>
+				<div class="form-group">
+					{{ Form::submit('Sign Up', ['class'=>'btn btn-primary']) }}
+				</div>
 
-		{{ Form::close() }}
-	</div>
+			{{ Form::close() }}
+		</div>
+	</section>
 @stop
