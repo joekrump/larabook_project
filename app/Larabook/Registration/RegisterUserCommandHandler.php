@@ -29,7 +29,7 @@ class RegisterUserCommandHandler implements CommandHandler{
     {
         // create a new user.
 		// 
-		$user = User::create([$command->username, $command->email, $command->password]);
+		$user = User::register($command->username, $command->email, $command->password);
         
         $this->repository->save($user);
         return $user;
