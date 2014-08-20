@@ -3,7 +3,7 @@ namespace Larabook\Forms;
 
 use Laracasts\Validation\FormValidator;
 
-class ReigstrationForm extends FormValidator
+class RegistrationForm extends FormValidator
 {
 	/**
 	 * Validation rules for the registration form
