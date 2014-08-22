@@ -40,6 +40,7 @@ class RegistrationController extends \BaseController {
 		
 		Auth::login($user);
 
-		return Redirect::home();
+        Flash::overlay('Glad to have you as a new Larabook member!');
+		return Redirect::home()->with('flash_message', '');
 	}
 }
