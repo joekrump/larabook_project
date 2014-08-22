@@ -23,3 +23,8 @@ Route::post('register',
 	['as'=>'register_path',
 	'uses'=>'RegistrationController@store'
 ]);
+
+Route::get('login', [
+    'as' => 'login_path',
+    'uses' => 'SessionsController@create'
+]);
