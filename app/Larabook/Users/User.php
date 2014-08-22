@@ -17,6 +17,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	// fields that may be mass assigned
 	// 
 	protected $fillable = ['username', 'email', 'password'];
+
+    protected $remember_token;
 	/**
 	 * The database table used by the model.
 	 *
@@ -65,7 +67,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         $user = new static(compact('username', 'email', 'password'));
 
-        $user->raise(new UserRegistered);
+        $user->raise(new UserRegistered($user));
         // Raise an event
         return $user;
     }
