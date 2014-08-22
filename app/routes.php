@@ -1,30 +1,40 @@
 <?php
 
-Event::listen('Larabook.Registration.Events.UserRegistered', function($event)
+Event::listen('Larabook.Registration.Events.UserRegistered', function ($event)
 {
 //    dd('send a notification email');
     return;
 });
 
 Route::get('/', [
-	'as' => 'home',
-	'uses' =>'PagesController@home'
+    'as'   => 'home',
+    'uses' => 'PagesController@home'
 ]);
 
-/**
- * Registration!
- */
+# Registration
 Route::get('register', [
-	'as' => 'register_path',
-	'uses' => 'RegistrationController@create'
+    'as'   => 'register_path',
+    'uses' => 'RegistrationController@create'
 ]);
 
-Route::post('register', 
-	['as'=>'register_path',
-	'uses'=>'RegistrationController@store'
-]);
+Route::post('register',
+    ['as'   => 'register_path',
+     'uses' => 'RegistrationController@store'
+    ]);
 
+# Login
 Route::get('login', [
-    'as' => 'login_path',
+    'as'   => 'login_path',
     'uses' => 'SessionsController@create'
 ]);
+
+Route::post('login', [
+    'as'   => 'login_path',
+    'uses' => 'SessionsController@store'
+]);
+Route::get('logout', [
+    'as'   => 'logout_path',
+    'uses' => 'SessionsController@destroy'
+]);
+# Statuses
+Route::get('statuses', 'StatusController@index');

@@ -1,7 +1,16 @@
 <?php
 
+use Larabook\Forms\SignInForm;
+
 class SessionsController extends \BaseController {
 
+    private $signInForm;
+
+    function __construct(SignInForm $signInForm)
+    {
+        $this->signInForm = $signInForm;
+        $this->beforeFilter('guest', ['except'=>'destroy']);
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -25,13 +34,21 @@ class SessionsController extends \BaseController {
 
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Get the input from the log in form and try to log in a user.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		//
+        $input = Input::only('email', 'password');
+        $result = $this->signInForm->validate($input);
+        if(Auth::attempt($input))
+        {
+            Flash::success('Welcome Back!');
+
+            return Redirect::intended('/statuses');
+        }
+        return Redirect::back()->withInput();
 	}
 
 
@@ -70,16 +87,17 @@ class SessionsController extends \BaseController {
 		//
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
+    /**
+     * Logout the logged in User and end their session.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy()
 	{
-		//
+		Auth::logout();
+
+        Flash::message('You have now been logged out.');
+
+        return Redirect::home();
 	}
 
 
