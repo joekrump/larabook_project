@@ -5,6 +5,8 @@ namespace Larabook\Registration;
 use Larabook\Users\UserRepository;
 use Larabook\Users\User;
 use Laracasts\Commander\CommandHandler;
+use Laracasts\Commander\Events\DispatchableTrait;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -17,7 +19,9 @@ use Laracasts\Commander\CommandHandler;
  * @author DJ
  */
 class RegisterUserCommandHandler implements CommandHandler{
-    
+
+    use DispatchableTrait;
+
     protected $repository;
     
     function __construct(UserRepository $repo)
@@ -29,9 +33,15 @@ class RegisterUserCommandHandler implements CommandHandler{
     {
         // create a new user.
 		// 
-		$user = User::register($command->username, $command->email, $command->password);
-        
+		$user = User::register(
+            $command->username, $command->email, $command->password
+        );
+
         $this->repository->save($user);
+
+        $this->dispatchEventsFor($user);
+
+
         return $user;
     }
 }
