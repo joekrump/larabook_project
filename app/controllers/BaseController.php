@@ -13,6 +13,9 @@ class BaseController extends Controller {
 		{
 			$this->layout = View::make($this->layout);
 		}
+        // set currentUser variable to = Auth::user() and provide access to that in every view
+        //
+        View::share('currentUser', Auth::user());
 	}
 
 }

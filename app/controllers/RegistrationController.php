@@ -17,7 +17,7 @@ class RegistrationController extends \BaseController {
 	{
 		$this->registrationForm = $registrationForm;
 
-        $this->beforeFilter('guest');
+        $this->beforeFilter('guest'); // filter all requests through the 'guest'  filter.
 	}
 	/**
 	 * Show the form to register a new user
