@@ -3,12 +3,14 @@
 @section('content')
     <h1>Post a Status</h1>
 
+    @include('layouts.partials.errors');
+
     {{ Form::open(['route'=>'status_path']) }}
 
         {{-- Status Form Input --}}
         <div class="form-group">
             {{ Form::label('body', 'Status:') }}
-            {{ Form::text('body', null, ['class'=> 'form-control']) }}
+            {{ Form::textarea('body', null, ['class'=> 'form-control']) }}
         </div>
         <div class="form-group">
             {{ Form::submit('Post Status', ['class'=> 'btn btn-primary']) }}
