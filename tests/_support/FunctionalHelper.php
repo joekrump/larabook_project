@@ -8,9 +8,14 @@ use Hash;
 
 class FunctionalHelper extends \Codeception\Module
 {
+    public function have($model, $overrides = [])
+    {
+        return DummyFactory::create($model, $overrides);
+    }
+
     public function haveAnAccount($overrides = [])
     {
-        return DummyFactory::create('Larabook\Users\User', $overrides);
+        return $this->have('Larabook\Users\User', $overrides);
     }
 
     /**
@@ -20,12 +25,20 @@ class FunctionalHelper extends \Codeception\Module
     {
         $password = 'testing';
 
-        $dummy_user = $this->haveAnAccount(['password'=>Hash::make($password)]);
+        $dummy_user = $this->haveAnAccount(['password'=>$password]);
 
         $I = $this->getModule('Laravel4');
         $I->amOnPage('/login');
         $I->fillField('email', $dummy_user->email);
         $I->fillField('password', $password);
         $I->click('Sign In');
+    }
+
+    public function postAStatus($body)
+    {
+        $I = $this->getModule('Laravel4');
+        $I->fillField('body', $body);
+        $I->click('Post Status');
+//        $this->have('Larabook\Statuses\Status', $overrides);
     }
 }
