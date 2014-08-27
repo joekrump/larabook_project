@@ -7,8 +7,8 @@
 		@if(!$currentUser)
             <p>
                 {{ link_to_route('register_path', 'Sign Up!', null, ['class' => 'btn btn-lg btn-primary']) }}
-                TEST
             </p>
         @endif
 	</div>
 @stop
+
