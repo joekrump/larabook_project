@@ -39,11 +39,11 @@ Route::get('logout', [
 
 # Statuses
 Route::get('statuses', [
-    'as' => 'status_path',
+    'as' => 'statuses_path',
     'uses' => 'StatusController@index'
 ]);
 
 Route::post('statuses', [
-    'as' => 'status_path',
+    'as' => 'statuses_path',
     'uses' => 'StatusController@store'
 ]);

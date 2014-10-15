@@ -11,5 +11,3 @@
         @endif
 	</div>
 @stop
-
-TEST TEST

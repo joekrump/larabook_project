@@ -3,9 +3,9 @@
 @section('content')
     <h1>Post a Status</h1>
 
-    @include('layouts.partials.errors');
+    @include('layouts.partials.errors')
 
-    {{ Form::open(['route'=>'status_path']) }}
+    {{ Form::open(['route'=>'statuses_path']) }}
 
         {{-- Status Form Input --}}
         <div class="form-group">
